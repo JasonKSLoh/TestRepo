@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://www.lohjason.com/TestRepo/WebToAppSdk.js"></script>
+    <script>
+        // $(document).ready(function(){
+        jQuery(function($){
+            $("#Pay").click(function(){
+                let manager = new quickstart.PaymentManager();
+                const payAppTypes = quickstart.PayAppType;
+                manager.addAllowedPaymentMethod(payAppTypes.NETSPAY);
+                manager.addAllowedPaymentMethod(payAppTypes.UOB_MIGHTY);
+
+                manager.setQrData("SOME_QR_DATA_HERE");
+                manager.setMerchantBundleId("SOME_BUNDLE_ID");
+                manager.setMerchantUrlScheme("SCHEME.URL.MERCHANT.COM");
+
+                // const supportedPaymentMethods = manager.getAllowedPaymentMethods();
+                // const deepLinkUrl = manager.getDeepLinkUrl(payAppTypes["_$wrappers"][supportedPaymentMethods[0]].scheme);
+
+                // showPaymentModal();
+                showPaymentModal2(manager);
+                // console.log(deepLinkUrl)
+            });
+        });
+    </script>
+</head>
+<body>
+
+
+<div id="Pay" style="text-align: center;">
+    <button>Do Payment</button>
+</div>
+
+
+</body>
+</html>
