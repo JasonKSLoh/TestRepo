@@ -203,11 +203,6 @@ function showPaymentModal2(paymentManagerInstance) {
         "width: 100%;" +
         "z-index: 9998;";
 
-    let imgStyle = "max-height: 8vh;" +
-        "margin-bot: 16px;" +
-        "margin-right: 32px;" +
-        "vertical-align: middle";
-
     let titleStyle = "text-align: center;" +
         "font-size: 24px;" +
         "font-weight: bold;" +
@@ -235,16 +230,10 @@ function showPaymentModal2(paymentManagerInstance) {
         "text-align: center;" +
         "z-index: 9999;";
 
-    let childDivStyle = "background: #FF00FF00;" +
-        "padding: 8px;" +
-        "color: #202020;" +
-        "font-family: Helvetica;" +
-        "font-size: 20px;" +
-        "text-align: left;";
 
     let newDiv = "<div style='" + modalBgStyle + "' id='inapp_modal_bg'>" +
         "<div style='" + parentDivStyle + "'>" +
-        "<div style='" + wrapperDivStyle + "'>" +
+        // "<div style='" + wrapperDivStyle + "'>" +
         "<div style='" + titleStyle + "'>Select Payment Option</div>";
 
     let supportedPaymentTypes = paymentManagerInstance.getAllowedPaymentMethods();
@@ -264,7 +253,8 @@ function showPaymentModal2(paymentManagerInstance) {
         newDiv += getDivForScheme(payType);
     }
 
-    newDiv += "</div></div></div>";
+    newDiv += "</div></div>";
+    // newDiv += "</div></div></div>";
 
     document.body.insertAdjacentHTML("afterBegin", newDiv);
     document.body.focus();
@@ -287,6 +277,8 @@ function showPaymentModal2(paymentManagerInstance) {
 function addClickListener(payType, paymentManager) {
     let elementSuffix = '_selection_div';
     let paymentElementId = payAppTypes["_$wrappers"][payType].scheme + elementSuffix;
+
+    document.body.focus();
 
     document.getElementById(paymentElementId).onclick = function (e) {
         let deepUrl = paymentManager.getDeepLinkUrl(payAppTypes["_$wrappers"][payType].scheme);
@@ -312,8 +304,9 @@ function getDivForScheme(payType) {
         "text-align: left;";
 
     let imgStyle = "max-height: 8vh;" +
-        "margin-bot: 16px;" +
-        "margin-right: 32px;" +
+        "margin-bot: 4%;" +
+        "margin-right: 10%;" +
+        "margin-left: 20%;" +
         "vertical-align: middle";
 
     switch (payType) {
