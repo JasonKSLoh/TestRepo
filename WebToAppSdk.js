@@ -204,11 +204,11 @@ function showPaymentModal2(paymentManagerInstance) {
         "z-index: 9998;";
 
     let titleStyle = "text-align: center;" +
-        "font-size: 24px;" +
+        "font-size: 5vw;" +
         "font-weight: bold;" +
         "color: #909090;" +
-        "margin-bot: 16px;" +
-        "margin-top: 16px;";
+        "margin-bottom: 4%;" +
+        "margin-top: 4%;";
 
     let wrapperDivStyle = "padding-left: 32px;" +
         "padding-right: 32px;" +
@@ -300,13 +300,13 @@ function getDivForScheme(payType) {
         "padding: 8px;" +
         "color: #202020;" +
         "font-family: Helvetica;" +
-        "font-size: 20px;" +
+        "margin-bottom: 6%;" +
+        "font-size: 4vw;" +
         "text-align: left;";
 
     let imgStyle = "max-height: 8vh;" +
-        "margin-bot: 4%;" +
         "margin-right: 10%;" +
-        "margin-left: 20%;" +
+        "margin-left: 10%;" +
         "vertical-align: middle";
 
     switch (payType) {
