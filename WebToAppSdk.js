@@ -222,14 +222,9 @@ function showPaymentModal2(paymentManagerInstance) {
     let titleStyle = "text-align: center;" +
         "font-weight: bold;" +
         "color: rgba(144,144,144,1);" +
+        "font-size: 6vw;" +
         "margin-bottom: 4%;" +
         "margin-top: 4%;";
-
-    if(window.innerHeight > window.innerWidth){
-        titleStyle += "font-size: 6vh;";
-    } else {
-        titleStyle += "font-size: 6vw;";
-    }
 
 
 
@@ -316,9 +311,9 @@ function getDivForScheme(payType) {
             "color: rgba(64,64,64, 1);" +
             "font-family: Helvetica;" +
             "margin-bottom: 6%;" +
-            "font-size: 5vh;" +
+            "font-size: 5vw;" +
             "text-align: left;";
-        imgStyle += "max-height: 8vh;" +
+        imgStyle += "height: 8vh;" +
             "margin-right: 10%;" +
             "margin-left: 10%;" +
             "vertical-align: middle";
@@ -329,7 +324,7 @@ function getDivForScheme(payType) {
             "margin-bottom: 6%;" +
             "font-size: 5vw;" +
             "text-align: left;";
-        imgStyle += "max-height: 8vw;" +
+        imgStyle += "height: 8vw;" +
             "margin-right: 10%;" +
             "margin-left: 20%;" +
             "vertical-align: middle";
