@@ -203,10 +203,24 @@ function showPaymentModal2(paymentManagerInstance) {
         "width: 100%;" +
         "z-index: 9998;";
 
+    let parentDivStyle = "padding: 8px;" +
+        "background: rgba(255,255,255,1);" +
+        "top: 20%;" +
+        "left: 10%;" +
+        "width: 80%;" +
+        "position: absolute;" +
+        "resize: vertical;" +
+        "border-radius: 4px;" +
+        "color: rgba(255,255,255,1);" +
+        "font-family: Helvetica;" +
+        "font-size: 20px;" +
+        "text-align: center;" +
+        "z-index: 9999;";
+
     let titleStyle = "text-align: center;" +
         "font-size: 5vw;" +
         "font-weight: bold;" +
-        "color: #909090;" +
+        "color: rgba(144,144,144,1);" +
         "margin-bottom: 4%;" +
         "margin-top: 4%;";
 
@@ -215,20 +229,6 @@ function showPaymentModal2(paymentManagerInstance) {
         "text-align: center;" +
         "margin: 0 auto;" +
         "display: inline-block";
-
-    let parentDivStyle = "padding: 8px;" +
-        "background: #FFFFFFFF;" +
-        "top: 20%;" +
-        "left: 10%;" +
-        "width: 80%;" +
-        "position: absolute;" +
-        "resize: vertical;" +
-        "border-radius: 4px;" +
-        "color: #FFFFFF;" +
-        "font-family: Helvetica;" +
-        "font-size: 20px;" +
-        "text-align: center;" +
-        "z-index: 9999;";
 
 
     let newDiv = "<div style='" + modalBgStyle + "' id='inapp_modal_bg'>" +
@@ -296,18 +296,26 @@ function getDivForScheme(payType) {
     let elementSuffix = '_selection_div';
     let paymentLabel;
 
-    let childDivStyle = "background: #FF00FF00;" +
-        "padding: 8px;" +
-        "color: #202020;" +
+    let childDivStyle = "padding: 8px;" +
+        "color: rgba(64,64,64, 1);" +
         "font-family: Helvetica;" +
         "margin-bottom: 6%;" +
         "font-size: 4vw;" +
         "text-align: left;";
 
-    let imgStyle = "max-height: 8vh;" +
-        "margin-right: 10%;" +
-        "margin-left: 10%;" +
-        "vertical-align: middle";
+    let imgStyle = '';
+    if(window.innerHeight > window.innerWidth){
+        imgStyle += "max-height: 8vh;" +
+            "margin-right: 10%;" +
+            "margin-left: 10%;" +
+            "vertical-align: middle";
+    } else {
+        imgStyle += "max-height: 8vw;" +
+            "margin-right: 10%;" +
+            "margin-left: 20%;" +
+            "vertical-align: middle";
+    }
+
 
     switch (payType) {
         case quickstart.PayAppType.NETSPAY: {
