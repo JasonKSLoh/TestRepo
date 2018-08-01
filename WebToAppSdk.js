@@ -201,6 +201,8 @@ function showPaymentModal2(paymentManagerInstance) {
         "height: 100%;" +
         "position: absolute;" +
         "width: 100%;" +
+        "top: 0%;" +
+        "left: 0%;" +
         "z-index: 9998;";
 
     let parentDivStyle = "padding: 8px;" +
@@ -218,11 +220,18 @@ function showPaymentModal2(paymentManagerInstance) {
         "z-index: 9999;";
 
     let titleStyle = "text-align: center;" +
-        "font-size: 5vw;" +
         "font-weight: bold;" +
         "color: rgba(144,144,144,1);" +
         "margin-bottom: 4%;" +
         "margin-top: 4%;";
+
+    if(window.innerHeight > window.innerWidth){
+        titleStyle += "font-size: 6vh;";
+    } else {
+        titleStyle += "font-size: 6vw;";
+    }
+
+
 
     let wrapperDivStyle = "padding-left: 32px;" +
         "padding-right: 32px;" +
@@ -296,20 +305,30 @@ function getDivForScheme(payType) {
     let elementSuffix = '_selection_div';
     let paymentLabel;
 
-    let childDivStyle = "padding: 8px;" +
-        "color: rgba(64,64,64, 1);" +
-        "font-family: Helvetica;" +
-        "margin-bottom: 6%;" +
-        "font-size: 4vw;" +
-        "text-align: left;";
 
+
+
+    let childDivStyle = '';
     let imgStyle = '';
+
     if(window.innerHeight > window.innerWidth){
+        childDivStyle += "padding: 8px;" +
+            "color: rgba(64,64,64, 1);" +
+            "font-family: Helvetica;" +
+            "margin-bottom: 6%;" +
+            "font-size: 5vh;" +
+            "text-align: left;";
         imgStyle += "max-height: 8vh;" +
             "margin-right: 10%;" +
             "margin-left: 10%;" +
             "vertical-align: middle";
     } else {
+        childDivStyle += "padding: 8px;" +
+            "color: rgba(64,64,64, 1);" +
+            "font-family: Helvetica;" +
+            "margin-bottom: 6%;" +
+            "font-size: 5vw;" +
+            "text-align: left;";
         imgStyle += "max-height: 8vw;" +
             "margin-right: 10%;" +
             "margin-left: 20%;" +
