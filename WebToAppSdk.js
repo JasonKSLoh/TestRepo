@@ -197,12 +197,22 @@ const payAppTypes = quickstart.PayAppType;
 
 function showPaymentModal2(paymentManagerInstance) {
 
-    let modalBgStyle = "background: rgba(0, 0, 0, 0.5);" +
+    let dimmerDivStyle = "background: rgba(0, 0, 0, 0.5);" +
+        "height: 100%;" +
+        "position: fixed;" +
+        "width: 100%;" +
+        "top: 0%;" +
+        "left: 0%" +
+        "overflow: auto;"+
+        "z-index: 9997;";
+
+    let modalBgStyle = "background: rgba(0, 0, 0, 0.0);" +
         "height: 100%;" +
         "position: absolute;" +
         "width: 100%;" +
         "top: 0%;" +
-        "left: 0%;" +
+        "left: 0%" +
+        "overflow: auto;"+
         "z-index: 9998;";
 
     let parentDivStyle = "padding: 8px;" +
@@ -235,6 +245,7 @@ function showPaymentModal2(paymentManagerInstance) {
         "display: inline-block";
 
 
+    let dimmerDiv = "<div style='"+ dimmerDivStyle +"' id='dimmer_div'></div>"
     let newDiv = "<div style='" + modalBgStyle + "' id='inapp_modal_bg'>" +
         "<div style='" + parentDivStyle + "'>" +
         // "<div style='" + wrapperDivStyle + "'>" +
@@ -258,16 +269,20 @@ function showPaymentModal2(paymentManagerInstance) {
     }
 
     newDiv += "</div></div>";
-    // newDiv += "</div></div></div>";
 
+
+    document.body.insertAdjacentHTML("afterBegin", dimmerDiv);
     document.body.insertAdjacentHTML("afterBegin", newDiv);
     document.body.focus();
 
     document.getElementById('inapp_modal_bg').onclick = function (e) {
         let modalBg = document.getElementById('inapp_modal_bg');
+        let dimmerDiv = document.getElementById('dimmer_div');
         let senderElement = e.target;
         if (senderElement === modalBg) {
-            modalBg.parentNode.removeChild(modalBg);
+            let parentElement = modalBg.parentNode;
+            parentElement.removeChild(modalBg);
+            parentElement.removeChild(dimmerDiv);
         }
     };
 
@@ -290,7 +305,10 @@ function addClickListener(payType, paymentManager) {
         console.log(deepUrl);
         window.location.href = deepUrl;
         let modalBg = document.getElementById('inapp_modal_bg');
-        modalBg.parentNode.removeChild(modalBg);
+        let dimmerDiv = document.getElementById('dimmer_div');
+        let parentElement = modalBg.parentNode;
+        parentElement.removeChild(modalBg);
+        parentElement.removeChild(dimmerDiv);
     };
 }
 
