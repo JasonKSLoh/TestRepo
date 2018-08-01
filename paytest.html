@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-    <!--<script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
-    <!--<script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.4.5/jquery.mobile-1.4.5.js"></script>-->
 
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <script src="WebToAppSdk.js"></script>
@@ -11,21 +8,18 @@
         // $(document).ready(function(){
         $(function(){
             $("#Pay").click(function(){
-                let manager = new quickstart.PaymentManager();
-                const payAppTypes = quickstart.PayAppType;
+                let manager = new NETSWebToApp.PaymentManager();
+                const payAppTypes = NETSWebToApp.PayAppType;
                 manager.addAllowedPaymentMethod(payAppTypes.NETSPAY);
                 manager.addAllowedPaymentMethod(payAppTypes.UOB_MIGHTY);
+                manager.addAllowedPaymentMethod(payAppTypes.OCBC_PAYANYONE);
 
                 manager.setQrData("SOME_QR_DATA_HERE");
                 manager.setMerchantBundleId("SOME_BUNDLE_ID");
                 manager.setMerchantUrlScheme("SCHEME.URL.MERCHANT.COM");
 
-                // const supportedPaymentMethods = manager.getAllowedPaymentMethods();
-                // const deepLinkUrl = manager.getDeepLinkUrl(payAppTypes["_$wrappers"][supportedPaymentMethods[0]].scheme);
 
-                // showPaymentModal();
-                showPaymentModal2(manager);
-                // console.log(deepLinkUrl)
+                showPaymentModal(manager);
             });
         });
     </script>
@@ -34,7 +28,7 @@
 
 
 <div id="Pay" style="text-align: center;">
-    <button>Do Payment</button>
+    <button style="min-height: 30%;width: 60%;">Do Payment</button>
 </div>
 
 
