@@ -314,6 +314,8 @@ function getDivForScheme(payType) {
             "font-size: 5vw;" +
             "text-align: left;";
         imgStyle += "height: 8vh;" +
+            "min-height: 8vh;" +
+            "max-height: 8vh;" +
             "margin-right: 10%;" +
             "margin-left: 10%;" +
             "vertical-align: middle";
@@ -325,6 +327,8 @@ function getDivForScheme(payType) {
             "font-size: 5vw;" +
             "text-align: left;";
         imgStyle += "height: 8vw;" +
+            "min-height: 8vw;" +
+            "max-height: 8vw;" +
             "margin-right: 10%;" +
             "margin-left: 20%;" +
             "vertical-align: middle";
