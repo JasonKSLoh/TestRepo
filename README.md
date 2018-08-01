@@ -6,4 +6,4 @@ New line
 # Header 1
 ## Header 2
 ### Header3
-[JS Caller](./test.html)
+[JS Caller](http://www.lohjason.com/TestRepo/test)
