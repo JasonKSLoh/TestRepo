@@ -1,9 +1,5 @@
 ## TestRepo
 
-Some text here
-New line
+Page to test functionality of web items.
 
-# Header 1
-## Header 2
-### Header3
-[JS Caller](http://www.lohjason.com/TestRepo/paytest)
+[Web To App caller](http://www.lohjason.com/TestRepo/paytest)
