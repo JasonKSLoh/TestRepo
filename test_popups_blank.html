@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Popup test - from _blank</title>
+    <meta charset="UTF-8">
+    <meta name='viewport'
+          content='width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    minimum-scale=1.0,
+    user-scalable=no'>
+</head>
+
+<script>
+    function onCloseClicked() {
+        document.getElementById("info").innerHTML = "window.close() Pressed";
+        window.close()
+    }
+</script>
+
+<body>
+
+<div style="padding: 20px; text-align: center">
+    <div style="padding: 10px;color:#5f9ea0" id="info" >
+        #### #### #### ####
+    </div>
+
+    <div id="status">
+        Popup opened with link to _blank
+
+        <br/>
+        <br/>
+        <br/>
+
+        <a href="#" onclick="onCloseClicked();">Close popup</a>
+    </div>
+</div>
+
+</body>
+
+</html>

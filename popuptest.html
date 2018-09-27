@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Popup Compat Test</title>
+    <meta charset="UTF-8">
+    <meta name='viewport'
+          content='width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    minimum-scale=1.0,
+    user-scalable=no'>
+</head>
+
+<body>
+<script>
+
+    function onAlertPressed() {
+        alert("JS Alert Here");
+        document.getElementById("info").innerHTML = "JS Alert Pressed"
+    }
+
+    function onPromptPressed() {
+        let promptInput = prompt("JS Prompt: Enter some text", "type text here");
+        document.getElementById("info").innerHTML = "JS Prompt Pressed";
+        if(promptInput != null){
+            document.getElementById("info").innerHTML = "JS Prompt Pressed: Got info - " + promptInput;
+        } else  {
+            document.getElementById("info").innerHTML = "JS Prompt Pressed: No input found";
+        }
+    }
+
+    function onConfirmPressed() {
+        document.getElementById("info").innerHTML = "JS Confirm Pressed";
+        var confirmInput;
+        if (confirm("JS Confirm: press something") === true){
+            confirmInput = "JS Confirm: OK  ";
+        } else  {
+            confirmInput = "JS Confirm: Cancelled";
+        }
+        document.getElementById("info").innerHTML = confirmInput;
+    }
+
+    function blankLinkPressed(){
+        document.getElementById("info").innerHTML = "_blank link Pressed";
+    }
+
+    function openPopupPressed() {
+        document.getElementById("info").innerHTML = "window.open() Pressed";
+        window.open("test_popups_windowopen.html",
+            'Popup - Window.open()',
+            'height=600, width=400');
+        return false;
+    }
+
+    function redirectPressed() {
+        document.getElementById("info").innerHTML = "redirect Pressed";
+    }
+</script>
+
+<!--
+Below we include the Login Button social plugin. This button uses
+the JavaScript SDK to present a graphical Login button that triggers
+the FB.login() function when clicked.
+-->
+
+<div style="padding: 20px; text-align: center">
+    <div style="padding: 10px;color:#5f9ea0" id="info" >
+        #### #### #### ####
+    </div>
+
+    <div style="padding: 10px;">
+        <a href="#" onclick="return openPopupPressed();">Window.open() Test</a>
+    </div>
+
+    <div style="padding: 10px;">
+        <a href="test_popups_blank.html" target="_blank" onclick="blankLinkPressed()">_blank target Test</a>
+    </div>
+
+    <div style="padding: 10px;">
+        <a href="https://www.google.com" onclick="redirectPressed()">Redirect Test</a>
+    </div>
+
+    <div style="padding: 10px;">
+        <button id="btnAlert" onclick="onAlertPressed()">JS alert()Test</button>
+    </div>
+
+    <div style="padding: 10px;">
+        <button id="btnPrompt" onclick="onPromptPressed()">JS prompt()Test</button>
+    </div>
+
+    <div style="padding: 10px;">
+        <button id="btnConfirm" onclick="onConfirmPressed()">JS confirm()Test</button>
+    </div>
+</div>
+
+</body>
+
+</html>
