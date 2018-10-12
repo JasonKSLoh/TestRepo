@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="generator.js"></script>
+    <script src="qrcode.js"></script>
+    <script>
+        function resetForm() {
+            document.getElementById("generatorForm").reset();
+            document.getElementById("qrcode").innerHTML = "";
+            document.getElementById("info").innerHTML = "";
+        }
+
+        function showCustomizedSgQr(payloadFormatIndicator_00_m,
+                                    pointOfInitiationMethod_01_o,
+                                    mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString,
+                                    sgQrIdInfo_51_m,
+                                    merchantCategoryCode_52_m,
+                                    txnCurrency_53_m,
+                                    txnAmt_54_c,
+                                    tipIndicator_55_o,
+                                    tipAmtFixed_56_c,
+                                    tipAmtPercent_57_c,
+                                    countryCode_58_m,
+                                    merchantName_59_m,
+                                    merchantCity_60_m,
+                                    postalCode_61_o,
+                                    billReference_subfieldOf62_o) {
+            if (!mid) {
+                mid = "UNKNOWN";
+            }
+            if (!tid) {
+                tid = "UNKNOWN";
+            }
+            if (!merchantName_59_m) {
+                merchantName_59_m = "UNKNOWN";
+            }
+
+            let sgQrString = makeCustomUatSgQr(payloadFormatIndicator_00_m,
+                pointOfInitiationMethod_01_o,
+                mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString,
+                sgQrIdInfo_51_m,
+                merchantCategoryCode_52_m,
+                txnCurrency_53_m,
+                txnAmt_54_c,
+                tipIndicator_55_o,
+                tipAmtFixed_56_c,
+                tipAmtPercent_57_c,
+                countryCode_58_m,
+                merchantName_59_m,
+                merchantCity_60_m,
+                postalCode_61_o,
+                billReference_subfieldOf62_o);
+
+            let divPre = "<div style=\"padding: 10px;text-align: left ;color:#5f9ea0\" >";
+            let divPost = "</div>";
+            let divBody = "<label style='color: #000000'>MID:</label>" + mid + "<br>" +
+                "<label style='color: #000000'>TID:</label>" + tid + "<br>" +
+                "<label style='color: #000000'>Merchant Name:</label>" + merchantName_59_m + "<br>" +
+                "<label style='color: #000000;vertical-align: top'>SGQR:</label>" + "<div style='max-width: 600px; word-wrap: break-word;display: inline-block'>" +sgQrString + "</div>";
+            document.getElementById("info").innerHTML = divPre + divBody + divPost;
+            displayQr(sgQrString);
+        }
+
+        function showSgQr(mid, tid, merchantName) {
+            if (!mid) {
+                mid = "UNKNOWN";
+            }
+            if (!tid) {
+                tid = "UNKNOWN";
+            }
+            if (!merchantName) {
+                merchantName = "UNKNOWN";
+            }
+            let sgQrString = makeTransplantedUatSgQr(mid, tid, merchantName);
+
+            let divPre = "<div style=\"padding: 10px;text-align: left ;color:#5f9ea0\" >";
+            let divPost = "</div>";
+            let divBody = "MID: " + mid + "<br>" + "TID: " + tid + "<br>" + "Merchant Name: " + merchantName + "<br>" + "SGQR: " + sgQrString;
+            document.getElementById("info").innerHTML = divPre + divBody + divPost;
+            displayQr(sgQrString);
+        }
+
+        function displayQr(qrData) {
+            document.getElementById("qrcode").innerHTML = "";
+            let qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: qrData,
+                width: 256,
+                height: 256,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.M
+            });
+        }
+
+    </script>
+    <title>UAT SGQR Generator</title>
+    <meta charset="UTF-8">
+    <meta name='viewport'
+          content='width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    minimum-scale=1.0,
+    user-scalable=no'>
+    <style>
+        label {
+            display: inline-block;
+            width: 175px;
+            text-align: left;
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+        }
+
+        input {
+            display: inline-block;
+            width: 200px;
+            font-family: Helvetica, sans-serif;
+        }
+
+        form {
+            font-family: Helvetica, sans-serif;
+            font-size: small;
+        }
+
+        body {
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div style="padding: 20px; text-align: left">
+
+    <!--<form id="generatorForm" action="javascript:showSgQr(mid.value, tid.value, merchantName.value)">-->
+    <!--MID:<br>-->
+    <!--<input type="text" id="mid" name="mid"><br>-->
+    <!--TID:<br>-->
+    <!--<input type="text" id="tid" name="tid"><br>-->
+    <!--Merchant name:<br>-->
+    <!--<input type="text" id="merchantName" name="merchantName"><br>-->
+    <!--<input type="submit" value="Generate">-->
+    <!--</form>-->
+
+
+    <form id="generatorForm" action="javascript:showCustomizedSgQr(payloadFormatIndicator.value,
+                pointOfInitiationMethod.value,
+                mid.value, tid.value, qrVersion.value, qrIssuerUen.value, qrTimestampExpiry.value, txnAmtModifier.value, secretString.value,
+                sgQrIdInfo.value,
+                merchantCategoryCode.value,
+                txnCurrency.value,
+                amount.value,
+                tipIndicator.value,
+                tipAmtAbs.value,
+                tipAmtPercent.value,
+                countryCode.value,
+                merchantName.value,
+                merchantCity.value,
+                postalCode.value,
+                billReference.value)">
+        <!--region::Mandatory Fields-->
+        <b>Mandatory Fields</b><br>
+        <label>MID</label>
+        <input type="text" id="mid" name="mid" minlength="1" required><br>
+
+        <label>TID</label>
+        <input type="text" id="tid" name="tid" minlength="1" required><br>
+
+        <label>Merchant Name</label>
+        <input type="text" id="merchantName" name="merchantName" minlength="1" maxlength="25" required><br>
+
+        <label>Secret String</label>
+        <input type="text" id="secretString" name="secretString" value="THISISNETSSECRETSTRINGFORTESTING">
+        [default: THISISNETSSECRETSTRINGFORTESTING]
+        <br>
+
+        <label>QR Version</label>
+        <input type="text" id="qrVersion" name="qrVersion" minlength="1" maxlength="1" value="1">
+        [default: 1]
+        <br>
+
+        <label>QR Issuer/UEN</label>
+        <input type="text" id="qrIssuerUen" name="qrIssuerUen" minlength="10" maxlength="10" value="0123456789">
+        [default: 0123456789]
+        <br>
+
+        <label>QR Timestamp/Expiry</label>
+        <input type="text" id="qrTimestampExpiry" name="qrTimestampExpiry" minlength="12" maxlength="12"
+               value="991231235900">
+        [default: 991231235900]
+        <br>
+
+        <label>Payload Format Indicator</label>
+        <input type="text" id="payloadFormatIndicator" name="payloadFormatIndicator" value="01" minlength="2"
+               maxlength="2">
+        [default: 01]
+        <br>
+
+        <label>SGQR ID Info</label>
+        <input type="text" id="sgQrIdInfo" name="sgQrIdInfo"
+               value="0007SG.SGQR01121808232F7399020701.0001030616873004020105020006040000070820180823" minlength="1"
+               maxlength="99">
+        [default: 0007SG.SGQR01121808232F7399020701.0001030616873004020105020006040000070820180823]
+        <br>
+
+        <label>Merchant Category Code</label>
+        <input type="text" id="merchantCategoryCode" name="merchantCategoryCode" value="0000" minlength="4"
+               maxlength="04">
+        [default: 0000]
+        <br>
+
+        <label>Txn Currency</label>
+        <input type="text" id="txnCurrency" name="txnCurrency" value="702" minlength="3" maxlength="3">
+        [default: 702]
+        <br>
+
+        <label>Country Code</label>
+        <input type="text" id="countryCode" name="countryCode" value="SG" minlength="2" maxlength="2">
+        [default: SG]
+        <br>
+
+        <label>Merchant City </label>
+        <input type="text" id="merchantCity" name="merchantCity" value="Singapore" maxlength="15">
+        [default: Singapore]
+        <br>
+        <!--endregion-->
+
+        <!--region::Optional Fields-->
+        <br><b>Optional Fields</b><br>
+        <label>Amount</label>
+        <input type="text" id="amount" name="amount" maxlength="13">
+        <br>
+
+        <label>Txn Amt Modifier</label>
+        <input type="text" id="txnAmtModifier" name="txnAmtModifier" maxlength="1">
+        <br>
+
+        <label>Point of Initiation Method</label>
+        <input type="text" id="pointOfInitiationMethod" name="pointOfInitiationMethod" value="11" maxlength="2">
+        [Static: 11, Dynamic: 12]
+        <br>
+
+        <label>Tip Indicator:</label>
+        <input type="text" id="tipIndicator" name="tipIndicator" maxlength="2">
+        <br>
+
+        <label>Tip Amt, Absolute:</label>
+        <input type="text" id="tipAmtAbs" name="tipAmtAbs" maxlength="13">
+        <br>
+
+        <label>Tip Amt, Percent:</label>
+        <input type="text" id="tipAmtPercent" name="tipAmtPercent" maxlength="5">
+        <br>
+
+        <label>Postal Code:</label>
+        <input type="text" id="postalCode" name="postalCode" maxlength="10">
+        <br>
+
+        <label>Bill Reference:</label>
+        <input type="text" id="billReference" name="billReference" maxlength="99">
+        <br>
+        <!--endregion-->
+
+        <br>
+        <input style="width: 400px;height: 25px;background-color: #7cb342; color: #ffffff" type="submit"
+               value="Generate">
+    </form>
+
+
+    <div>
+        <button style="display: inline-block;background-color: #039be5; color:#ffffff;width: 400px; height: 25px; font-family: Helvetica, sans-serif"
+                id="btnReset" onclick="resetForm()">Reset
+        </button>
+    </div>
+
+    <div style="padding: 10px;color:#5f9ea0; " id="info">
+        #### #### #### ####
+    </div>
+
+    <div style="padding: 10px" id="qrcode"></div>
+
+
+</div>
+
+</body>
+
+</html>
