@@ -13,7 +13,7 @@
 
         function showCustomizedSgQr(payloadFormatIndicator_00_m,
                                     pointOfInitiationMethod_01_o,
-                                    mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString,
+                                    mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, qrType, secretString,
                                     sgQrIdInfo_51_m,
                                     merchantCategoryCode_52_m,
                                     txnCurrency_53_m,
@@ -38,7 +38,7 @@
 
             let sgQrString = makeCustomUatSgQr(payloadFormatIndicator_00_m,
                 pointOfInitiationMethod_01_o,
-                mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString,
+                mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, qrType, secretString,
                 sgQrIdInfo_51_m,
                 merchantCategoryCode_52_m,
                 txnCurrency_53_m,
@@ -145,7 +145,7 @@
 
     <form id="generatorForm" action="javascript:showCustomizedSgQr(payloadFormatIndicator.value,
                 pointOfInitiationMethod.value,
-                mid.value, tid.value, qrVersion.value, qrIssuerUen.value, qrTimestampExpiry.value, txnAmtModifier.value, secretString.value,
+                mid.value, tid.value, qrVersion.value, qrIssuerUen.value, qrTimestampExpiry.value, txnAmtModifier.value, qrType.value, secretString.value,
                 sgQrIdInfo.value,
                 merchantCategoryCode.value,
                 txnCurrency.value,
@@ -233,6 +233,11 @@
 
         <label>Txn Amt Modifier</label>
         <input type="text" id="txnAmtModifier" name="txnAmtModifier" maxlength="1">
+        <br>
+
+        <label>QR Type</label>
+        <input type="text" id="qrType" name="qrType" maxlength="1">
+        [CFC: 2]
         <br>
 
         <label>Point of Initiation Method</label>

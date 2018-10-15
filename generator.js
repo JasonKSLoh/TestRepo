@@ -35,7 +35,7 @@
 
 function makeCustomUatSgQr(payloadFormatIndicator_00_m,
                            pointOfInitiationMethod_01_o,
-                           mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString,
+                           mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, qrType, secretString,
                            sgQrIdInfo_51_m,
                            merchantCategoryCode_52_m,
                            txnCurrency_53_m,
@@ -49,7 +49,6 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
                            postalCode_61_o,
                            billReference_subfieldOf62_o) {
     let UNKNOWN = "UNKNOWN";
-    let INVALID = "*INVALID_INPUT*";
 
     let rec00 = "";
     let rec01 = "";
@@ -73,11 +72,9 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
     }
     rec00 = makeCheckedSgQrObj(0, payloadFormatIndicator_00_m);
 
-    if (pointOfInitiationMethod_01_o) {
-        rec01 = makeCheckedSgQrObj(1, pointOfInitiationMethod_01_o);
-    }
+    rec01 = makeCheckedSgQrObj(1, pointOfInitiationMethod_01_o);
 
-    rec26 = makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, secretString);
+    rec26 = makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp, txnAmtModifier, qrType, secretString);
 
     if (!sgQrIdInfo_51_m) {
         sgQrIdInfo_51_m = UNKNOWN;
@@ -109,7 +106,7 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
     rec59 = makeCheckedSgQrObj(59, merchantName_59_m);
 
     if (!merchantCity_60_m) {
-        merchantCity_60_m = "UNKNOWN";
+        merchantCity_60_m = UNKNOWN;
     }
     rec60 = makeCheckedSgQrObj(60, merchantCity_60_m);
     rec61 = makeCheckedSgQrObj(61, postalCode_61_o);
@@ -149,12 +146,13 @@ function makeCheckedSgQrObj(id, data) {
     return idString + dataLen + data;
 }
 
-function makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp, txmAmtModifier, secretString) {
+function makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp, txmAmtModifier, qrType, secretString) {
     let rec0 = "";
     let rec1 = "";
     let rec2 = "";
     let rec3 = "";
     let rec9 = "";
+    let rec10 = "";
 
     if (!mid) {
         mid = "UNKNOWN";
@@ -197,7 +195,17 @@ function makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp
         rec9 = "09" + rec9Len + txmAmtModifier;
     }
 
-    let preSigString = rec0 + rec1 + rec2 + rec3 + rec9;
+    if(qrType){
+        let rec10Len;
+        if(qrType.length < 10){
+            rec10Len = "0" + qrType.length;
+        } else  {
+            rec10Len = "" + qrType.length;
+        }
+        rec10 = "10" + rec10Len + qrType;
+    }
+
+    let preSigString = rec0 + rec1 + rec2 + rec3 + rec9 + rec10;
 
     let sig = "99" + "08" + generateSignature(preSigString, secretString).toUpperCase();
     let netsData = preSigString + sig;
