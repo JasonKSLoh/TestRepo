@@ -124,7 +124,7 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
     if (billReference_subfieldOf62_o) {
         addDataData += makeCheckedSgQrObj(1, billReference_subfieldOf62_o);
     }
-    if (mobileNo_subfieldOf62_o){
+    if (mobileNo_subfieldOf62_o) {
         addDataData += makeCheckedSgQrObj(2, mobileNo_subfieldOf62_o);
     }
     if (storeLabel_subfieldOf62_o) {
@@ -361,7 +361,7 @@ let crcTable = [0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5,
     0x2e93, 0x3eb2, 0x0ed1, 0x1ef0];
 
 
-function crc16(inputString) {
+function crc16_org(inputString) {
     let crc = 0xFFFF;
     let j, i;
 
@@ -369,12 +369,63 @@ function crc16(inputString) {
     for (i = 0; i < inputString.length; i++) {
         c = inputString.charCodeAt(i);
         if (c > 255) {
+            console.log("Error for character: " + c);
             throw new RangeError();
         }
         j = (c ^ (crc >> 8)) & 0xFF;
         crc = crcTable[j] ^ (crc << 8);
     }
     return ((crc ^ 0) & 0xFFFF);
+}
+
+function crc16(inputString) {
+    let crc = 0xFFFF;
+    let j, i;
+
+    let c;
+
+    let bytes = toUTF8Array(inputString);
+    for (i = 0; i < bytes.length; i++) {
+        c = bytes[i];
+        if (c > 255) {
+            console.log("Error for character: " + c);
+            throw new RangeError();
+        }
+        j = (c ^ (crc >> 8)) & 0xFF;
+        crc = crcTable[j] ^ (crc << 8);
+    }
+    return ((crc ^ 0) & 0xFFFF);
+}
+
+function toUTF8Array(str) {
+    var utf8 = [];
+    for (var i = 0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+            utf8.push(0xc0 | (charcode >> 6),
+                0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+            utf8.push(0xe0 | (charcode >> 12),
+                0x80 | ((charcode >> 6) & 0x3f),
+                0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+            i++;
+            // UTF-16 encodes 0x10000-0x10FFFF by
+            // subtracting 0x10000 and splitting the
+            // 20 bits of 0x0-0xFFFFF into two halves
+            charcode = 0x10000 + (((charcode & 0x3ff) << 10)
+                | (str.charCodeAt(i) & 0x3ff));
+            utf8.push(0xf0 | (charcode >> 18),
+                0x80 | ((charcode >> 12) & 0x3f),
+                0x80 | ((charcode >> 6) & 0x3f),
+                0x80 | (charcode & 0x3f));
+        }
+    }
+    return utf8;
 }
 
 //endregion
