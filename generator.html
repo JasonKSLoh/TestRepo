@@ -25,7 +25,15 @@
                                     merchantName_59_m,
                                     merchantCity_60_m,
                                     postalCode_61_o,
-                                    billReference_subfieldOf62_o) {
+                                    billReference_subfieldOf62_o,
+                                    mobileNo_subfieldOf62_o,
+                                    storeLabel_subfieldOf62_o,
+                                    loyaltyNo_subfieldOf62_o,
+                                    reference_subfieldOf62_o,
+                                    customerLabel_subfieldOf62_o,
+                                    terminalLabel_subfieldOf62_o,
+                                    txnPurpose_subfieldOf62_o,
+                                    addnCustDataReq_subfieldOf62_o) {
             if (!mid) {
                 mid = "UNKNOWN";
             }
@@ -50,7 +58,15 @@
                 merchantName_59_m,
                 merchantCity_60_m,
                 postalCode_61_o,
-                billReference_subfieldOf62_o);
+                billReference_subfieldOf62_o,
+                mobileNo_subfieldOf62_o,
+                storeLabel_subfieldOf62_o,
+                loyaltyNo_subfieldOf62_o,
+                reference_subfieldOf62_o,
+                customerLabel_subfieldOf62_o,
+                terminalLabel_subfieldOf62_o,
+                txnPurpose_subfieldOf62_o,
+                addnCustDataReq_subfieldOf62_o);
 
             let divPre = "<div style=\"padding: 10px;text-align: left ;color:#5f9ea0\" >";
             let divPost = "</div>";
@@ -157,7 +173,15 @@
                 merchantName.value,
                 merchantCity.value,
                 postalCode.value,
-                billReference.value)">
+                billReference.value,
+                mobileNo.value,
+                storeLabel.value,
+                loyaltyNo.value,
+                referenceLabel.value,
+                customerLabel.value,
+                terminalLabel.value,
+                txnPurpose.value,
+                addnConsDataReq.value)">
         <!--region::Mandatory Fields-->
         <b>Mandatory Fields</b><br>
         <label>MID</label>
@@ -261,8 +285,40 @@
         <input type="text" id="postalCode" name="postalCode" maxlength="10">
         <br>
 
-        <label>Bill Reference:</label>
-        <input type="text" id="billReference" name="billReference" maxlength="99">
+        <label>Bill Number/Reference:</label>
+        <input type="text" id="billReference" name="billReference" maxlength="25">
+        <br>
+
+        <label>Mobile No:</label>
+        <input type="text" id="mobileNo" name="mobileNo" maxlength="25">
+        <br>
+
+        <label>Store Label:</label>
+        <input type="text" id="storeLabel" name="storeLabel" maxlength="25">
+        <br>
+
+        <label>Loyalty No:</label>
+        <input type="text" id="loyaltyNo" name="loyaltyNo" maxlength="25">
+        <br>
+
+        <label>Reference Label:</label>
+        <input type="text" id="referenceLabel" name="referenceLabel" maxlength="25">
+        <br>
+
+        <label>Customer Label:</label>
+        <input type="text" id="customerLabel" name="customerLabel" maxlength="25">
+        <br>
+
+        <label>Terminal Label:</label>
+        <input type="text" id="terminalLabel" name="terminalLabel" maxlength="25">
+        <br>
+
+        <label>Txn Purpose:</label>
+        <input type="text" id="txnPurpose" name="txnPurpose" maxlength="25">
+        <br>
+
+        <label>Addn Consumer Data Req:</label>
+        <input type="text" id="addnConsDataReq" name="addnConsDataReq" maxlength="3">
         <br>
         <!--endregion-->
 

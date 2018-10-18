@@ -47,7 +47,16 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
                            merchantName_59_m,
                            merchantCity_60_m,
                            postalCode_61_o,
-                           billReference_subfieldOf62_o) {
+                           billReference_subfieldOf62_o,
+                           mobileNo_subfieldOf62_o,
+                           storeLabel_subfieldOf62_o,
+                           loyaltyNo_subfieldOf62_o,
+                           reference_subfieldOf62_o,
+                           customerLabel_subfieldOf62_o,
+                           terminalLabel_subfieldOf62_o,
+                           txnPurpose_subfieldOf62_o,
+                           addnCustDataReq_subfieldOf62_o) {
+
     let UNKNOWN = "UNKNOWN";
 
     let rec00 = "";
@@ -111,10 +120,36 @@ function makeCustomUatSgQr(payloadFormatIndicator_00_m,
     rec60 = makeCheckedSgQrObj(60, merchantCity_60_m);
     rec61 = makeCheckedSgQrObj(61, postalCode_61_o);
 
+    let addDataData = "";
     if (billReference_subfieldOf62_o) {
-        let subField = makeCheckedSgQrObj(1, billReference_subfieldOf62_o);
-        rec62 = makeCheckedSgQrObj(62, subField);
+        addDataData += makeCheckedSgQrObj(1, billReference_subfieldOf62_o);
     }
+    if (mobileNo_subfieldOf62_o){
+        addDataData += makeCheckedSgQrObj(2, mobileNo_subfieldOf62_o);
+    }
+    if (storeLabel_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(3, storeLabel_subfieldOf62_o);
+    }
+    if (loyaltyNo_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(4, loyaltyNo_subfieldOf62_o);
+    }
+    if (reference_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(5, reference_subfieldOf62_o);
+    }
+    if (customerLabel_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(6, customerLabel_subfieldOf62_o);
+    }
+    if (terminalLabel_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(7, terminalLabel_subfieldOf62_o);
+    }
+    if (txnPurpose_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(8, txnPurpose_subfieldOf62_o);
+    }
+    if (addnCustDataReq_subfieldOf62_o) {
+        addDataData += makeCheckedSgQrObj(9, addnCustDataReq_subfieldOf62_o);
+    }
+
+    rec62 = makeCheckedSgQrObj(62, addDataData);
     let preCrc = rec00 + rec01 + rec26 + rec51 + rec52 + rec53 + rec54 + rec55 + rec56 + rec57 + rec58 + rec59 + rec60 + rec61 + rec62 + "6304";
     let crc = crc16(preCrc);
     let crcAsHex = Number(crc).toString(16);
@@ -138,9 +173,9 @@ function makeCheckedSgQrObj(id, data) {
     if (data.length > 99) {
         data = data.substring(0, 99);
         dataLen = "99";
-    } else if(data.length < 10){
+    } else if (data.length < 10) {
         dataLen = "0" + data.length;
-    } else  {
+    } else {
         dataLen = data.length;
     }
     return idString + dataLen + data;
@@ -195,11 +230,11 @@ function makeNetsMerchantSgQrObject2(mid, tid, version, qrIssuerUen, qrTimestamp
         rec9 = "09" + rec9Len + txmAmtModifier;
     }
 
-    if(qrType){
+    if (qrType) {
         let rec10Len;
-        if(qrType.length < 10){
+        if (qrType.length < 10) {
             rec10Len = "0" + qrType.length;
-        } else  {
+        } else {
             rec10Len = "" + qrType.length;
         }
         rec10 = "10" + rec10Len + qrType;
