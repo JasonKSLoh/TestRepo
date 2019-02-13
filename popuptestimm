@@ -1,0 +1,3 @@
+<script language="JavaScript">
+	    var win = window.open('http://google.com', "TrxEnd", "height=500, width=500,scrollbars=yes,resizable=yes");
+</script>
