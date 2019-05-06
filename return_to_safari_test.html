@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Redirect back to safari in same tab test</title>
+    <meta charset="UTF-8">
+    <meta name='viewport'
+          content='width=device-width,
+    initial-scale=1.0,
+    maximum-scale=1.0,
+    minimum-scale=1.0,
+    user-scalable=no'>
+</head>
+
+<body>
+<script>
+
+
+function redirectPressed() {
+        document.getElementById("info").innerHTML = "Go To App Pressed";
+    }
+
+
+</script>
+
+<!--
+Below we include the Login Button social plugin. This button uses
+the JavaScript SDK to present a graphical Login button that triggers
+the FB.login() function when clicked.
+-->
+
+<div style="padding: 20px; text-align: center">
+    <div style="padding: 10px;color:#5f9ea0" id="info" >
+        #### #### #### ####
+    </div>
+    <div style="padding: 10px;">
+        <a href="apptabtest://blahblah" onclick="goToTestAppPressed()">Go to test app</a>
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
